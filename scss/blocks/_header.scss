@@ -1,0 +1,46 @@
+.header {
+    padding-top: 38px;
+    padding-bottom: 140px;
+}
+
+
+.nav {
+    
+    &__logo {
+        grid-column: span 4;
+        padding-right: 31px;
+
+        &_img {
+            width: 100%;
+        }
+    }
+
+    &__list {
+        grid-column: 5/-1;
+        display: flex;
+        align-items: start;
+    }
+
+    &__item {
+        &:not(:last-child) {
+            margin-right: 60px;
+        }
+    }
+
+    &__link {
+        font-weight: 900;
+        font-size: 24px;
+        text-transform: uppercase;
+        color: var(--color-primary);
+
+        &--activ {
+            color: var(--color-accent);
+        }
+
+        &:hover {
+            color: var(--color-accent);
+        }
+    }
+
+
+}

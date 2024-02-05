@@ -1,0 +1,120 @@
+.articles {
+
+    margin-bottom: 135px;
+    
+    &__big-column {
+        grid-column: span 9;
+    }
+
+    &__small-column {
+        grid-column: 10/-1;
+    }
+}
+
+.article__category {
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.article__source {
+    font-family: var(--font-family);
+    font-weight: 500;
+    color: var(--color-gray);
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.article__date {
+    font-weight: 500;
+    color: var(--color-accent);
+    text-transform: uppercase;
+}
+
+.main-article {
+    display: grid;
+    grid-template-columns: repeat(9, 101px);
+    gap: 20px;
+    
+    &:not(:last-child) {
+        margin-bottom: 50px;
+    }
+
+    &__img-container {
+        position: relative;
+        grid-column: span 3;
+        min-height: 185px;
+        max-height: 344px;
+    }
+
+    &__img {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+
+    &__content {
+        grid-column: 4/-1;
+        padding-right: 63px;
+    }
+
+    &__category {
+        margin-bottom: 7px;
+        display: block;
+    }
+
+    &__title {
+        margin: 0;
+        padding: 0;
+        font-weight: 700;
+        font-size: 42px;
+        margin-bottom: 34px;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+                line-clamp: 3;
+        -webkit-box-orient: vertical;        
+    }
+
+    &__text {
+        padding: 0;
+        margin: 0;
+        font-size: 22px;
+        margin-bottom: 36px;
+        padding-right: 60px;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+                line-clamp: 3;
+        -webkit-box-orient: vertical; 
+    }
+}
+
+.small-article {
+
+    padding-left: 10px;
+    border-left: 9px solid black;
+    &:not(:last-child) {
+        margin-bottom: 35px;
+    }
+
+    &__title {
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--color-primary);
+        margin-bottom: 14px;
+    }
+
+    &__date {
+        margin-right: 36px;
+    }
+
+    &__source {
+        &::before {
+            content: "   ·   ";
+        }
+    }
+}
