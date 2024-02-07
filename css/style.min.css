@@ -180,6 +180,11 @@ p {
   font-weight: 700;
   color: var(--color-primary);
   margin-bottom: 14px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
 .small-article__date {
   margin-right: 36px;
