@@ -278,99 +278,50 @@ const data = {
 const mainNews = data.items.slice(0, 3);
 const smallNews = data.items.slice(3, 12);
 
-const createMainNewsItem = (item) => {
-    const article = document.createElement("article");
-    const imgContainer = document.createElement("div");
-    const image = document.createElement("img");
-    const content = document.createElement("div");
-    const category = document.createElement("span");
-    const title = document.createElement("h2");
-    const text = document.createElement("p");
-    const source = document.createElement("span");
-
-    article.classList.add("main-article");
-    imgContainer.classList.add("main-article__img-container");
-    image.classList.add("main-article__img");
-    content.classList.add("main-article__content");
-    category.classList.add("main-article__category", "article__category");
-    title.classList.add("main-article__title");
-    text.classList.add("main-article__text");
-    source.classList.add("main-article__source", "article__source");
-
-    imgContainer.appendChild(image);
-    content.appendChild(category);
-    content.appendChild(title);
-    content.appendChild(text);
-    content.appendChild(source);
-
-    article.appendChild(imgContainer);
-    article.appendChild(content);
-
-    image.src = item.image;
-    category.textContent = data.categories.find(categoryItem => categoryItem.id === item.category_id).name; 
-    title.textContent = item.title;
-    text.textContent = item.description;
-    source.textContent = data.sources.find(sourcesItem => sourcesItem.id === item.source_id).name;
-
-    return article;
-}
-
-
-const createSmallNewsItem = (item) => {
-    const article = document.createElement("article");
-    const title = document.createElement("h2");
-    const caption = document.createElement("div");
-    const date = document.createElement("span");
-    const source = document.createElement("span");
-
-    article.classList.add("small-article");
-    title.classList.add("small-article__title");
-    caption.classList.add("small-article__caption");
-    date.classList.add("small-article__date", "article__date");
-    source.classList.add("small-article__source", "article__source");
-
-    caption.appendChild(date);
-    caption.append(source);
-    article.appendChild(title);
-    article.appendChild(caption)
-
-    const dateNews = new Date(item.date).toLocaleString("ru-RU", {month: "long", day: "2-digit"})
-
-    title.textContent = item.title;
-    source.textContent = data.sources.find(sourcesItem => sourcesItem.id === item.source_id).name;
-    date.textContent = dateNews;
-
-    return article;
-}
-
 const mainNewsContainer = document.querySelector(".articles__big-column");
 const smallNewsContainer = document.querySelector(".articles__small-column");
 
 mainNews.forEach(item => {
-    mainNewsContainer.appendChild(createMainNewsItem(item));
+
+    const category = data.categories.find(categoryItem => categoryItem.id === item.category_id).name
+    const source = data.sources.find(sourcesItem => sourcesItem.id === item.source_id).name;
+
+    const template = document.createElement("template");
+
+    template.innerHTML = `
+        <article class="main-article">
+            <div class="main-article__img-container">
+                <img src="${item.image}" alt="Фото новости" class="main-article__img">
+            </div>
+            <div class="main-article__content">
+                <span class="main-article__category article__category">${category}</span>
+                <h2 class="main-article__title">${item.title}</h2>
+                <p class="main-article__text">${item.description}</p>
+                <span class="main-article__source article__source">${source}</span>
+            </div>
+        </article>
+    `;
+
+    mainNewsContainer.appendChild(template.content);
 })
 
-smallNews.forEach(item => {    
-    smallNewsContainer.appendChild(createSmallNewsItem(item));
+smallNews.forEach(item => {   
+
+    const source = data.sources.find(sourcesItem => sourcesItem.id === item.source_id).name;
+    const date = new Date(item.date).toLocaleString("ru-Ru", {day: "2-digit", month: "long"})
+    
+    const template = document.createElement("template");
+
+    template.innerHTML = `
+        <article class="small-article">
+            <h2 class="small-article__title">${item.title}</h2>
+            <div class="small-article__caption">
+                <span class="small-article__date article__date">${date}</span>
+                <span class="small-article__source article__source">${item.source}</span>
+            </div>
+        </article>
+    `;
+
+    smallNewsContainer.appendChild(template.content);
 })
 
-
-{/* <article class="main-article">
-    <div class="main-article__img-container">
-        <img src="./images/image1.jpg" alt="Фото новости" class="main-article__img">
-    </div>
-    <div class="main-article__content">
-        <span class="main-article__category article__category">Технологии</span>
-        <h2 class="main-article__title">Отец жанра. Как уже забытый трип-хоп определяет самую популяр…. К</h2>
-        <p class="main-article__text">Новая мода на топовые наряды необычных цветов. В сезоне – топики, шорты-боксеры, сланцы и сандалии. А также большие солнечные очки и яркая шляпка.</p>
-        <span class="main-article__source article__source">Источник</span>
-    </div>
-</article> */}
-
-{/* <article class="small-article">
-    <h2 class="small-article__title">В американском зоопарке празднуют рождение гориллы: видео</h2>
-    <div class="small-article__caption">
-        <span class="small-article__date article__date">12 Июля</span>
-        <span class="small-article__source article__source">Источник</span>
-    </div>
-</article> */}
